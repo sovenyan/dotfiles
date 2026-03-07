@@ -31,112 +31,49 @@ get_main_ip() {
     ip route get 1.1.1.1 2>/dev/null | awk '/src/ {for(i=1;i<=NF;i++) if($i=="src") print $(i+1)}'
 }
 
+get_windows_home() {
+    local win_home
+    win_home=$(cmd.exe /C "echo %USERPROFILE%" 2>/dev/null | tr -d '\r')
+
+    if [ -n "$win_home" ]; then
+        wslpath "$win_home"
+    fi
+}
+
+cdwin() {
+    local wsl_home
+    wsl_home=$(get_windows_home)
+
+    if [ -n "$wsl_home" ] && [ -d "$wsl_home" ]; then
+        cd "$wsl_home" || return 1
+    else
+        echo "Windows home nem talalhato ebben a shellben."
+        return 1
+    fi
+}
+
 get_vpn_status() {
-    if ip link show tun0 >/dev/null 2>&1 && ip addr show tun0 | grep -q "inet "; then
-        echo "VPN:tun0"
-    elif ip link show ppp0 >/dev/null 2>&1 && ip addr show ppp0 | grep -q "inet "; then
-        echo "VPN:ppp0"
+    local vpn_ip
+    vpn_ip=$(ip -o -4 addr show up scope global 2>/dev/null | awk '$2 ~ /^(tun|tap|ppp|wg)/ {split($4,a,"/"); print a[1]; exit}')
+
+    if [ -n "$vpn_ip" ]; then
+        echo "VPN:$vpn_ip"
     else
         echo "VPN:off"
     fi
 }
 
 get_vpn_status_prompt() {
-    if ip link show tun0 >/dev/null 2>&1 && ip addr show tun0 | grep -q "inet "; then
-        printf '\033[1;32mVPN:tun0'
-    elif ip link show ppp0 >/dev/null 2>&1 && ip addr show ppp0 | grep -q "inet "; then
-        printf '\033[1;32mVPN:ppp0'
+    local vpn_ip
+    vpn_ip=$(ip -o -4 addr show up scope global 2>/dev/null | awk '$2 ~ /^(tun|tap|ppp|wg)/ {split($4,a,"/"); print a[1]; exit}')
+
+    if [ -n "$vpn_ip" ]; then
+        printf '\033[1;32mVPN:%s' "$vpn_ip"
     else
         printf '\033[1;31mVPN:off'
     fi
 }
 
-ai() {
-    local prompt="$*"
-    if [ -z "$prompt" ]; then
-        echo "Használat: ai \"kérdés\""
-        return 1
-    fi
-    if [ -z "$OPENAI_API_KEY" ]; then
-        echo "Hiba: nincs beállítva az OPENAI_API_KEY"
-        return 1
-    fi
-
-    python3 - "$OPENAI_API_KEY" "$prompt" <<'PY'
-import json
-import sys
-import urllib.error
-import urllib.request
-
-api_key = sys.argv[1]
-prompt = sys.argv[2]
-
-payload = {
-    "model": "gpt-5.3-codex",
-    "input": prompt,
-}
-
-req = urllib.request.Request(
-    "https://api.openai.com/v1/responses",
-    data=json.dumps(payload).encode("utf-8"),
-    headers={
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {api_key}",
-    },
-)
-
-try:
-    with urllib.request.urlopen(req, timeout=90) as resp:
-        raw = resp.read().decode("utf-8", errors="replace")
-except urllib.error.HTTPError as e:
-    body = e.read().decode("utf-8", errors="replace")
-    try:
-        data = json.loads(body)
-        err = data.get("error", {})
-        msg = err.get("message") if isinstance(err, dict) else None
-        print(f"API hiba ({e.code}): {msg or body}")
-    except Exception:
-        print(f"API hiba ({e.code}): {body}")
-    sys.exit(2)
-except Exception as e:
-    print(f"Kapcsolati hiba: {e}")
-    sys.exit(3)
-
-try:
-    data = json.loads(raw)
-except Exception:
-    print(raw)
-    sys.exit(0)
-
-# Newer responses may include pre-computed output_text.
-out = data.get("output_text")
-if isinstance(out, str) and out.strip():
-    print(out)
-    sys.exit(0)
-
-# Fallback: collect text chunks from output[*].content[*].text
-chunks = []
-for item in data.get("output", []) or []:
-    if not isinstance(item, dict):
-        continue
-    for content in item.get("content", []) or []:
-        if not isinstance(content, dict):
-            continue
-        text = content.get("text")
-        if isinstance(text, str) and text:
-            chunks.append(text)
-
-if chunks:
-    print("\n".join(chunks))
-    sys.exit(0)
-
-err = data.get("error")
-if isinstance(err, dict) and err.get("message"):
-    print(f"API hiba: {err['message']}")
-else:
-    print("Nem sikerült szöveges választ kinyerni a válaszból.")
-PY
-}
 
 # make less more friendly for non-text input files, see lesspipe(1)
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -220,7 +157,7 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     export LS_COLORS="$LS_COLORS:ow=30;44:" # fix ls color for folders with 777 permissions
 
-    alias ls='ls -la --color=auto'
+    alias ls='ls -lah --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -229,7 +166,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
     alias diff='diff --color=auto'
     alias ip='ip --color=auto'
-    alias ll='ls -lah'
+    alias ll='ls -la --color=auto'
     alias pyserver='python3 -m http.server 8000'
     alias nmapd='nmap -sV -sC -T4 -n --reason --open'
     alias ports='ss -tulpn'
@@ -278,9 +215,9 @@ if ! shopt -oq posix; then
 fi
 
 # History search by current typed prefix with arrow keys.
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-bind '"\eOA": history-search-backward'
-bind '"\eOB": history-search-forward'
+# bind '"\e[A": history-search-backward'
+# bind '"\e[B": history-search-forward'
+# bind '"\eOA": history-search-backward'
+# bind '"\eOB": history-search-forward'
 
 [ -f ~/.config/openai.env ] && source ~/.config/openai.env

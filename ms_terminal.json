@@ -1,0 +1,264 @@
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": 
+    [
+        {
+            "command": 
+            {
+                "action": "copy",
+                "singleLine": false
+            },
+            "id": "User.copy.644BA8F2"
+        },
+        {
+            "command": "paste",
+            "id": "User.paste"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "id": "User.splitPane.A6751878"
+        },
+        {
+            "command": "find",
+            "id": "User.find"
+        },
+        {
+            "command": {
+                "action": "newTab",
+                "profile": "{a7701d45-590a-4e9b-a8cf-bc8571f34ff4}"
+            },
+            "id": "User.newTab.KaliRoot"
+        }
+    ],
+    "copyFormatting": "none",
+    "copyOnSelect": false,
+    "defaultProfile": "{55ca431a-3a87-5fb3-83cd-11ececc031d2}",
+    "keybindings": 
+    [
+        {
+            "id": "User.copy.644BA8F2",
+            "keys": "ctrl+c"
+        },
+        {
+            "id": "User.paste",
+            "keys": "ctrl+v"
+        },
+        {
+            "id": "User.find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "User.splitPane.A6751878",
+            "keys": "alt+shift+d"
+        },
+        {
+            "id": "User.newTab.KaliRoot",
+            "keys": "ctrl+alt+r"
+        }
+    ],
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": 
+    {
+        "defaults": 
+        {
+            "bellStyle": "none"
+        },
+        "list": 
+        [
+            {
+                "colorScheme": "Arthur",
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "elevate": false,
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell"
+            },
+            {
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": false,
+                "name": "Command Prompt"
+            },
+            {
+                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+                "hidden": false,
+                "name": "Git Bash",
+                "source": "Git"
+            },
+            {
+                "altGrAliasing": true,
+                "antialiasingMode": "grayscale",
+                "closeOnExit": "automatic",
+                "colorScheme": "Campbell",
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "cursorShape": "bar",
+                "elevate": true,
+                "font": 
+                {
+                    "face": "Cascadia Mono",
+                    "size": 12
+                },
+                "guid": "{ca56f719-a5cd-4070-883a-65367e64a566}",
+                "hidden": false,
+                "historySize": 9001,
+                "icon": "ms-appx:///ProfileIcons/{61c54bbd-c2c6-5271-96e7-009a87ff44bf}.png",
+                "name": "Windows PowerShell Admin",
+                "padding": "8, 8, 8, 8",
+                "snapOnInput": true,
+                "startingDirectory": "%USERPROFILE%",
+                "useAcrylic": false
+            },
+            {
+                "commandline": "wsl -d kali-linux -u andrew -- kex --wtstart -s",
+                "guid": "{c58b01ef-7701-5eda-b159-c53dbe839144}",
+                "hidden": false,
+                "icon": "C:\\Users\\soven\\Pictures\\Icons\\kali-menu.png",
+                "name": "Win-KeX",
+                "startingDirectory": "//wsl$/kali-linux/home/andrew"
+            },
+            {
+                "commandline": "wsl -d kali-linux -u andrew -- kex --sl --wtstart -s",
+                "guid": "{dc615b28-9ed8-57cb-bd5c-bc1dea0e2501}",
+                "hidden": true,
+                "icon": "C:\\Users\\soven\\Pictures\\Icons\\kali-menu.png",
+                "name": "Win-KeX SL",
+                "startingDirectory": "//wsl$/kali-linux/home/andrew"
+            },
+            {
+                "commandline": "wsl -d kali-linux -u andrew -- kex --esm --wtstart -s",
+                "guid": "{3fbbacca-4de1-5b43-b4d0-e711831b2efa}",
+                "hidden": true,
+                "icon": "C:\\Users\\soven\\Pictures\\Icons\\kali-menu.png",
+                "name": "Win-KeX ESM",
+                "startingDirectory": "//wsl$/kali-linux/home/andrew"
+            },
+            {
+                "commandline": "wsl -d kali-linux -u root --cd ~",
+                "guid": "{a7701d45-590a-4e9b-a8cf-bc8571f34ff4}",
+                "hidden": false,
+                "icon": "C:\\Users\\soven\\Pictures\\Icons\\kali-menu.png",
+                "name": "Kali Root"
+            },
+            {
+                "commandline": "wsl -d kali-linux -u andrew --cd ~",
+                "guid": "{55ca431a-3a87-5fb3-83cd-11ececc031d2}",
+                "hidden": false,
+                "icon": "C:\\Users\\soven\\Pictures\\Icons\\kali-menu.png",
+                "name": "Kali (andrew)"
+            },
+            {
+                "guid": "{9ed0a2ff-5206-5f5d-a2b7-35aa15833b32}",
+                "hidden": true,
+                "name": "kali-linux",
+                "source": "Microsoft.WSL"
+            }
+        ]
+    },
+    "schemes": 
+    [
+        {
+            "background": "#262A33",
+            "black": "#000000",
+            "blue": "#2472C8",
+            "brightBlack": "#666666",
+            "brightBlue": "#2472C8",
+            "brightCyan": "#0FA8CD",
+            "brightGreen": "#05BC79",
+            "brightPurple": "#BC3FBC",
+            "brightRed": "#CD3131",
+            "brightWhite": "#E5E5E5",
+            "brightYellow": "#E5E512",
+            "cursorColor": "#F8F8F0",
+            "cyan": "#0FA8CD",
+            "foreground": "#E5E5E5",
+            "green": "#05BC79",
+            "name": "Andromeda",
+            "purple": "#BC3FBC",
+            "red": "#CD3131",
+            "selectionBackground": "#5A5C62",
+            "white": "#E5E5E5",
+            "yellow": "#E5E512"
+        },
+        {
+            "background": "#1C1C1C",
+            "black": "#3D352A",
+            "blue": "#6495ED",
+            "brightBlack": "#554444",
+            "brightBlue": "#87CEEB",
+            "brightCyan": "#B0C4DE",
+            "brightGreen": "#88AA22",
+            "brightPurple": "#996600",
+            "brightRed": "#CC5533",
+            "brightWhite": "#DDCCBB",
+            "brightYellow": "#FFA75D",
+            "cursorColor": "#E2BBEF",
+            "cyan": "#B0C4DE",
+            "foreground": "#DDEEDD",
+            "green": "#86AF80",
+            "name": "Arthur",
+            "purple": "#DEB887",
+            "red": "#CD5C5C",
+            "selectionBackground": "#4D4D4D",
+            "white": "#BBAA99",
+            "yellow": "#E8AE5B"
+        },
+        {
+            "background": "#000000",
+            "black": "#0C0C0C",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#3B78FF",
+            "brightCyan": "#61D6D6",
+            "brightGreen": "#16C60C",
+            "brightPurple": "#B4009E",
+            "brightRed": "#E74856",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#F9F1A5",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#13A10E",
+            "name": "Color Scheme 13",
+            "purple": "#881798",
+            "red": "#C50F1F",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#C19C00"
+        },
+        {
+            "background": "#262626",
+            "black": "#1C1C1C",
+            "blue": "#86AED6",
+            "brightBlack": "#1C1C1C",
+            "brightBlue": "#86AED6",
+            "brightCyan": "#B1E7DD",
+            "brightGreen": "#AED686",
+            "brightPurple": "#D6AED6",
+            "brightRed": "#D68686",
+            "brightWhite": "#EFEFEF",
+            "brightYellow": "#E4C9AF",
+            "cursorColor": "#E4C9AF",
+            "cyan": "#8ADBB4",
+            "foreground": "#D0D0D0",
+            "green": "#AED686",
+            "name": "Teerb",
+            "purple": "#D6AED6",
+            "red": "#D68686",
+            "selectionBackground": "#4D4D4D",
+            "white": "#D0D0D0",
+            "yellow": "#D7AF87"
+        }
+    ],
+    "themes": []
+}

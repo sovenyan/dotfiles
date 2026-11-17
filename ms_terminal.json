@@ -120,42 +120,42 @@
                 "useAcrylic": false
             },
             {
-                "commandline": "wsl -d kali-linux -u andrew -- kex --wtstart -s",
+                "commandline": "wsl -d kali-linux -- kex --wtstart -s",
                 "guid": "{c58b01ef-7701-5eda-b159-c53dbe839144}",
                 "hidden": false,
-                "icon": "C:\\Users\\soven\\Pictures\\Icons\\kali-menu.png",
+                "icon": "%USERPROFILE%\\Pictures\\Icons\\kali-menu.png",
                 "name": "Win-KeX",
-                "startingDirectory": "//wsl$/kali-linux/home/andrew"
+                "startingDirectory": "~"
             },
             {
-                "commandline": "wsl -d kali-linux -u andrew -- kex --sl --wtstart -s",
+                "commandline": "wsl -d kali-linux -- kex --sl --wtstart -s",
                 "guid": "{dc615b28-9ed8-57cb-bd5c-bc1dea0e2501}",
                 "hidden": true,
-                "icon": "C:\\Users\\soven\\Pictures\\Icons\\kali-menu.png",
+                "icon": "%USERPROFILE%\\Pictures\\Icons\\kali-menu.png",
                 "name": "Win-KeX SL",
-                "startingDirectory": "//wsl$/kali-linux/home/andrew"
+                "startingDirectory": "~"
             },
             {
-                "commandline": "wsl -d kali-linux -u andrew -- kex --esm --wtstart -s",
+                "commandline": "wsl -d kali-linux -- kex --esm --wtstart -s",
                 "guid": "{3fbbacca-4de1-5b43-b4d0-e711831b2efa}",
                 "hidden": true,
-                "icon": "C:\\Users\\soven\\Pictures\\Icons\\kali-menu.png",
+                "icon": "%USERPROFILE%\\Pictures\\Icons\\kali-menu.png",
                 "name": "Win-KeX ESM",
-                "startingDirectory": "//wsl$/kali-linux/home/andrew"
+                "startingDirectory": "~"
             },
             {
                 "commandline": "wsl -d kali-linux -u root --cd ~",
                 "guid": "{a7701d45-590a-4e9b-a8cf-bc8571f34ff4}",
                 "hidden": false,
-                "icon": "C:\\Users\\soven\\Pictures\\Icons\\kali-menu.png",
+                "icon": "%USERPROFILE%\\Pictures\\Icons\\kali-menu.png",
                 "name": "Kali Root"
             },
             {
-                "commandline": "wsl -d kali-linux -u andrew --cd ~",
+                "commandline": "wsl -d kali-linux --cd ~",
                 "guid": "{55ca431a-3a87-5fb3-83cd-11ececc031d2}",
                 "hidden": false,
-                "icon": "C:\\Users\\soven\\Pictures\\Icons\\kali-menu.png",
-                "name": "Kali (andrew)"
+                "icon": "%USERPROFILE%\\Pictures\\Icons\\kali-menu.png",
+                "name": "Kali"
             },
             {
                 "guid": "{9ed0a2ff-5206-5f5d-a2b7-35aa15833b32}",
